@@ -1,0 +1,20 @@
+
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "PIRSensorInterfacing", "PIRSensorInterfacing\PIRSensorInterfacing_6_0.cproj", "{E6108BEC-C1CC-48CB-A218-92298F0A99AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E6108BEC-C1CC-48CB-A218-92298F0A99AF}.Debug|AVR.ActiveCfg = Debug|AVR
+		{E6108BEC-C1CC-48CB-A218-92298F0A99AF}.Debug|AVR.Build.0 = Debug|AVR
+		{E6108BEC-C1CC-48CB-A218-92298F0A99AF}.Release|AVR.ActiveCfg = Release|AVR
+		{E6108BEC-C1CC-48CB-A218-92298F0A99AF}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
