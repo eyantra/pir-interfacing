@@ -13,6 +13,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
+#include <stdbool.h>
 #include "lcd.h"
 #include "pir.h"
 
@@ -63,6 +64,6 @@ int main(void)
 			lcd_string("NO MOTION");
 		}
 		
-		_delay_ms(500);
+		_delay_ms(100);
 	}
 }

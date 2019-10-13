@@ -9,7 +9,7 @@
 
 void pir_port_config(void);
 void pir_init();
-int update_pir_sensor();
+bool update_pir_sensor();
 
 //Function to config sensor port
 void pir_port_config(void)
@@ -25,8 +25,8 @@ void pir_init()
 }
 
 //Function to get sensor digital data
-int update_pir_sensor()
+bool update_pir_sensor()
 {
-	if(PINL == 0x80) return 0;
-	return 1;
+	if(PINL == 0x80) return true;
+	return false;
 }
