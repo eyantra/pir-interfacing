@@ -14,7 +14,7 @@ bool update_pir_sensor();
 //Function to config sensor port
 void pir_port_config(void)
 {
-	DDRL |= 0x00; //set sensor port io direction
+	DDRL |= ~(1<<PINL7); //set sensor port io direction
 	//PORTL &= 0xFF; //clear data to port
 }
 
@@ -27,6 +27,6 @@ void pir_init()
 //Function to get sensor digital data
 bool update_pir_sensor()
 {
-	if(PINL == 0x80) return true;
+	if(PINL == (1<<PINL7)) return true;
 	return false;
 }
