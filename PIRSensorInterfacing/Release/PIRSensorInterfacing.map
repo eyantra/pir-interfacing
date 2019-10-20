@@ -370,9 +370,9 @@ END GROUP
  .text.pir_port_config
                 0x000002a0        0xc PIRSensorInterfacing.o
                 0x000002a0                pir_port_config
- .text.update_pir_sensor
+ .text.pirReading
                 0x000002ac        0xe PIRSensorInterfacing.o
-                0x000002ac                update_pir_sensor
+                0x000002ac                pirReading
  .text.port_init
                 0x000002ba        0x8 PIRSensorInterfacing.o
                 0x000002ba                port_init

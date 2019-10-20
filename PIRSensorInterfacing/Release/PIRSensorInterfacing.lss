@@ -325,17 +325,17 @@ Disassembly of section .text:
  2a8:	80 83       	st	Z, r24
  2aa:	08 95       	ret
 
-000002ac <update_pir_sensor>:
+000002ac <pirReading>:
  2ac:	90 91 09 01 	lds	r25, 0x0109	; 0x800109 <__TEXT_REGION_LENGTH__+0x700109>
  2b0:	81 e0       	ldi	r24, 0x01	; 1
  2b2:	90 38       	cpi	r25, 0x80	; 128
- 2b4:	09 f0       	breq	.+2      	; 0x2b8 <update_pir_sensor+0xc>
+ 2b4:	09 f0       	breq	.+2      	; 0x2b8 <pirReading+0xc>
  2b6:	80 e0       	ldi	r24, 0x00	; 0
  2b8:	08 95       	ret
 
 000002ba <port_init>:
- 2ba:	0e 94 50 01 	call	0x2a0	; 0x2a0 <pir_port_config>
- 2be:	0c 94 04 01 	jmp	0x208	; 0x208 <lcd_init>
+ 2ba:	0e 94 04 01 	call	0x208	; 0x208 <lcd_init>
+ 2be:	0c 94 50 01 	jmp	0x2a0	; 0x2a0 <pir_port_config>
 
 000002c2 <init_devices>:
  2c2:	f8 94       	cli
@@ -370,7 +370,7 @@ Disassembly of section .text:
  308:	89 e1       	ldi	r24, 0x19	; 25
  30a:	92 e0       	ldi	r25, 0x02	; 2
  30c:	0e 94 41 01 	call	0x282	; 0x282 <lcd_string>
- 310:	0e 94 56 01 	call	0x2ac	; 0x2ac <update_pir_sensor>
+ 310:	0e 94 56 01 	call	0x2ac	; 0x2ac <pirReading>
  314:	88 23       	and	r24, r24
  316:	31 f0       	breq	.+12     	; 0x324 <main+0x58>
  318:	83 e8       	ldi	r24, 0x83	; 131

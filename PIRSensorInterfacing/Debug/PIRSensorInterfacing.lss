@@ -17,15 +17,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   6 .debug_abbrev 00000d2f  00000000  00000000  00001aef  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   000007a5  00000000  00000000  0000281e  2**0
+  7 .debug_line   000007a3  00000000  00000000  0000281e  2**0
                   CONTENTS, READONLY, DEBUGGING
   8 .debug_frame  00000154  00000000  00000000  00002fc4  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000006ad  00000000  00000000  00003118  2**0
+  9 .debug_str    000006a6  00000000  00000000  00003118  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    0000076d  00000000  00000000  000037c5  2**0
+ 10 .debug_loc    0000076d  00000000  00000000  000037be  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000098  00000000  00000000  00003f32  2**0
+ 11 .debug_ranges 00000098  00000000  00000000  00003f2b  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -373,36 +373,36 @@ void pir_init()
  2f0:	80 83       	st	Z, r24
  2f2:	08 95       	ret
 
-000002f4 <update_pir_sensor>:
+000002f4 <pirReading>:
 }
 
 //Function to get sensor digital data
-bool update_pir_sensor()
+bool pirReading()
 {
-	if(PINL == (1<<PINL7)) return true;
+	if(PINL == (1 << PINL7)) return true;
  2f4:	90 91 09 01 	lds	r25, 0x0109	; 0x800109 <__TEXT_REGION_LENGTH__+0x700109>
  2f8:	81 e0       	ldi	r24, 0x01	; 1
  2fa:	90 38       	cpi	r25, 0x80	; 128
- 2fc:	09 f0       	breq	.+2      	; 0x300 <update_pir_sensor+0xc>
+ 2fc:	09 f0       	breq	.+2      	; 0x300 <pirReading+0xc>
  2fe:	80 e0       	ldi	r24, 0x00	; 0
 	return false;
  300:	08 95       	ret
 
 00000302 <port_init>:
+void init_devices(void);
+
+//Function to initialize PORTS
+void port_init()
+{
+	lcd_init();
+ 302:	0e 94 04 01 	call	0x208	; 0x208 <lcd_init>
 }
 
 //Function to initialize sensor
 void pir_init()
 {
 	pir_port_config();
- 302:	0e 94 74 01 	call	0x2e8	; 0x2e8 <pir_port_config>
-
-//Function to initialize PORTS
-void port_init()
-{
-	pir_init();
-	lcd_init();
- 306:	0e 94 04 01 	call	0x208	; 0x208 <lcd_init>
+ 306:	0e 94 74 01 	call	0x2e8	; 0x2e8 <pir_port_config>
  30a:	08 95       	ret
 
 0000030c <init_devices>:
@@ -475,8 +475,8 @@ int main(void)
 	{
 		//lcd_clear();
 		
-		if(update_pir_sensor())
- 360:	0e 94 7a 01 	call	0x2f4	; 0x2f4 <update_pir_sensor>
+		if(pirReading())
+ 360:	0e 94 7a 01 	call	0x2f4	; 0x2f4 <pirReading>
  364:	88 23       	and	r24, r24
  366:	49 f0       	breq	.+18     	; 0x37a <main+0x64>
 		{

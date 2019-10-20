@@ -23,8 +23,8 @@ void init_devices(void);
 //Function to initialize PORTS
 void port_init()
 {
-	pir_init();
 	lcd_init();
+	pir_init();
 }
 
 //Function to initialize all devices
@@ -53,7 +53,7 @@ int main(void)
 	{
 		//lcd_clear();
 		
-		if(update_pir_sensor())
+		if(pirReading())
 		{
 			lcd_cursor(1,4);
 			lcd_string("  MOTION ");
