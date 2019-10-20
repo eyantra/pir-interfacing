@@ -7,6 +7,9 @@
  * Modifier: Debdut
  */ 
 
+#ifndef PIR_H_
+#define PIR_H_
+
 void pir_port_config(void);
 void pir_init();
 bool pirReading();
@@ -30,3 +33,5 @@ bool pirReading()
 	if(PINL == (1 << PINL7)) return true;
 	return false;
 }
+
+#endif
