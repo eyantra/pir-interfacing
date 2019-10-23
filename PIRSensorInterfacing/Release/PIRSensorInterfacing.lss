@@ -3,21 +3,21 @@ PIRSensorInterfacing.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000038  00800200  0000034a  000003be  2**0
+  0 .data         00000038  00800200  00000348  000003bc  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  1 .text         0000034a  00000000  00000000  00000074  2**1
+  1 .text         00000348  00000000  00000000  00000074  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .comment      00000030  00000000  00000000  000003f6  2**0
+  2 .comment      00000030  00000000  00000000  000003f4  2**0
                   CONTENTS, READONLY
-  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000428  2**2
+  3 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000424  2**2
                   CONTENTS, READONLY
-  4 .debug_info   00000bbc  00000000  00000000  00000468  2**0
+  4 .debug_info   00000bbc  00000000  00000000  00000464  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_abbrev 00000b1a  00000000  00000000  00001024  2**0
+  5 .debug_abbrev 00000b1a  00000000  00000000  00001020  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_line   000001f9  00000000  00000000  00001b3e  2**0
+  6 .debug_line   000001f9  00000000  00000000  00001b3a  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_str    000003e6  00000000  00000000  00001d37  2**0
+  7 .debug_str    000003e6  00000000  00000000  00001d33  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -95,7 +95,7 @@ Disassembly of section .text:
   f4:	12 e0       	ldi	r17, 0x02	; 2
   f6:	a0 e0       	ldi	r26, 0x00	; 0
   f8:	b2 e0       	ldi	r27, 0x02	; 2
-  fa:	ea e4       	ldi	r30, 0x4A	; 74
+  fa:	e8 e4       	ldi	r30, 0x48	; 72
   fc:	f3 e0       	ldi	r31, 0x03	; 3
   fe:	00 e0       	ldi	r16, 0x00	; 0
  100:	0b bf       	out	0x3b, r16	; 59
@@ -119,8 +119,8 @@ Disassembly of section .text:
  118:	a8 33       	cpi	r26, 0x38	; 56
  11a:	b2 07       	cpc	r27, r18
  11c:	e1 f7       	brne	.-8      	; 0x116 <.do_clear_bss_loop>
- 11e:	0e 94 66 01 	call	0x2cc	; 0x2cc <main>
- 122:	0c 94 a3 01 	jmp	0x346	; 0x346 <_exit>
+ 11e:	0e 94 65 01 	call	0x2ca	; 0x2ca <main>
+ 122:	0c 94 a2 01 	jmp	0x344	; 0x344 <_exit>
 
 00000126 <__bad_interrupt>:
  126:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -321,81 +321,80 @@ Disassembly of section .text:
  2a0:	ea e0       	ldi	r30, 0x0A	; 10
  2a2:	f1 e0       	ldi	r31, 0x01	; 1
  2a4:	80 81       	ld	r24, Z
- 2a6:	8f 67       	ori	r24, 0x7F	; 127
+ 2a6:	8f 77       	andi	r24, 0x7F	; 127
  2a8:	80 83       	st	Z, r24
  2aa:	08 95       	ret
 
 000002ac <pirReading>:
- 2ac:	90 91 09 01 	lds	r25, 0x0109	; 0x800109 <__TEXT_REGION_LENGTH__+0x700109>
- 2b0:	81 e0       	ldi	r24, 0x01	; 1
- 2b2:	90 38       	cpi	r25, 0x80	; 128
- 2b4:	09 f0       	breq	.+2      	; 0x2b8 <pirReading+0xc>
- 2b6:	80 e0       	ldi	r24, 0x00	; 0
- 2b8:	08 95       	ret
+ 2ac:	80 91 09 01 	lds	r24, 0x0109	; 0x800109 <__TEXT_REGION_LENGTH__+0x700109>
+ 2b0:	88 1f       	adc	r24, r24
+ 2b2:	88 27       	eor	r24, r24
+ 2b4:	88 1f       	adc	r24, r24
+ 2b6:	08 95       	ret
 
-000002ba <port_init>:
- 2ba:	0e 94 04 01 	call	0x208	; 0x208 <lcd_init>
- 2be:	0c 94 50 01 	jmp	0x2a0	; 0x2a0 <pir_port_config>
+000002b8 <port_init>:
+ 2b8:	0e 94 04 01 	call	0x208	; 0x208 <lcd_init>
+ 2bc:	0c 94 50 01 	jmp	0x2a0	; 0x2a0 <pir_port_config>
 
-000002c2 <init_devices>:
- 2c2:	f8 94       	cli
- 2c4:	0e 94 5d 01 	call	0x2ba	; 0x2ba <port_init>
- 2c8:	78 94       	sei
- 2ca:	08 95       	ret
+000002c0 <init_devices>:
+ 2c0:	f8 94       	cli
+ 2c2:	0e 94 5c 01 	call	0x2b8	; 0x2b8 <port_init>
+ 2c6:	78 94       	sei
+ 2c8:	08 95       	ret
 
-000002cc <main>:
- 2cc:	0e 94 61 01 	call	0x2c2	; 0x2c2 <init_devices>
- 2d0:	82 e8       	ldi	r24, 0x82	; 130
- 2d2:	0e 94 df 00 	call	0x1be	; 0x1be <lcd_wr_command>
- 2d6:	80 e0       	ldi	r24, 0x00	; 0
- 2d8:	92 e0       	ldi	r25, 0x02	; 2
- 2da:	0e 94 41 01 	call	0x282	; 0x282 <lcd_string>
- 2de:	83 ec       	ldi	r24, 0xC3	; 195
- 2e0:	0e 94 df 00 	call	0x1be	; 0x1be <lcd_wr_command>
- 2e4:	8e e0       	ldi	r24, 0x0E	; 14
- 2e6:	92 e0       	ldi	r25, 0x02	; 2
- 2e8:	0e 94 41 01 	call	0x282	; 0x282 <lcd_string>
- 2ec:	2f ef       	ldi	r18, 0xFF	; 255
- 2ee:	8f ef       	ldi	r24, 0xFF	; 255
- 2f0:	99 e5       	ldi	r25, 0x59	; 89
- 2f2:	21 50       	subi	r18, 0x01	; 1
- 2f4:	80 40       	sbci	r24, 0x00	; 0
- 2f6:	90 40       	sbci	r25, 0x00	; 0
- 2f8:	e1 f7       	brne	.-8      	; 0x2f2 <main+0x26>
- 2fa:	00 c0       	rjmp	.+0      	; 0x2fc <main+0x30>
- 2fc:	00 00       	nop
- 2fe:	0e 94 4d 01 	call	0x29a	; 0x29a <lcd_clear>
- 302:	84 ec       	ldi	r24, 0xC4	; 196
- 304:	0e 94 df 00 	call	0x1be	; 0x1be <lcd_wr_command>
- 308:	89 e1       	ldi	r24, 0x19	; 25
- 30a:	92 e0       	ldi	r25, 0x02	; 2
- 30c:	0e 94 41 01 	call	0x282	; 0x282 <lcd_string>
- 310:	0e 94 56 01 	call	0x2ac	; 0x2ac <pirReading>
- 314:	88 23       	and	r24, r24
- 316:	31 f0       	breq	.+12     	; 0x324 <main+0x58>
- 318:	83 e8       	ldi	r24, 0x83	; 131
- 31a:	0e 94 df 00 	call	0x1be	; 0x1be <lcd_wr_command>
- 31e:	83 e2       	ldi	r24, 0x23	; 35
- 320:	92 e0       	ldi	r25, 0x02	; 2
- 322:	05 c0       	rjmp	.+10     	; 0x32e <main+0x62>
- 324:	83 e8       	ldi	r24, 0x83	; 131
- 326:	0e 94 df 00 	call	0x1be	; 0x1be <lcd_wr_command>
- 32a:	8d e2       	ldi	r24, 0x2D	; 45
- 32c:	92 e0       	ldi	r25, 0x02	; 2
- 32e:	0e 94 41 01 	call	0x282	; 0x282 <lcd_string>
- 332:	2f ef       	ldi	r18, 0xFF	; 255
- 334:	8f e7       	ldi	r24, 0x7F	; 127
- 336:	94 e0       	ldi	r25, 0x04	; 4
- 338:	21 50       	subi	r18, 0x01	; 1
- 33a:	80 40       	sbci	r24, 0x00	; 0
- 33c:	90 40       	sbci	r25, 0x00	; 0
- 33e:	e1 f7       	brne	.-8      	; 0x338 <main+0x6c>
- 340:	00 c0       	rjmp	.+0      	; 0x342 <main+0x76>
- 342:	00 00       	nop
- 344:	e5 cf       	rjmp	.-54     	; 0x310 <main+0x44>
+000002ca <main>:
+ 2ca:	0e 94 60 01 	call	0x2c0	; 0x2c0 <init_devices>
+ 2ce:	82 e8       	ldi	r24, 0x82	; 130
+ 2d0:	0e 94 df 00 	call	0x1be	; 0x1be <lcd_wr_command>
+ 2d4:	80 e0       	ldi	r24, 0x00	; 0
+ 2d6:	92 e0       	ldi	r25, 0x02	; 2
+ 2d8:	0e 94 41 01 	call	0x282	; 0x282 <lcd_string>
+ 2dc:	83 ec       	ldi	r24, 0xC3	; 195
+ 2de:	0e 94 df 00 	call	0x1be	; 0x1be <lcd_wr_command>
+ 2e2:	8e e0       	ldi	r24, 0x0E	; 14
+ 2e4:	92 e0       	ldi	r25, 0x02	; 2
+ 2e6:	0e 94 41 01 	call	0x282	; 0x282 <lcd_string>
+ 2ea:	2f ef       	ldi	r18, 0xFF	; 255
+ 2ec:	8f ef       	ldi	r24, 0xFF	; 255
+ 2ee:	99 e5       	ldi	r25, 0x59	; 89
+ 2f0:	21 50       	subi	r18, 0x01	; 1
+ 2f2:	80 40       	sbci	r24, 0x00	; 0
+ 2f4:	90 40       	sbci	r25, 0x00	; 0
+ 2f6:	e1 f7       	brne	.-8      	; 0x2f0 <main+0x26>
+ 2f8:	00 c0       	rjmp	.+0      	; 0x2fa <main+0x30>
+ 2fa:	00 00       	nop
+ 2fc:	0e 94 4d 01 	call	0x29a	; 0x29a <lcd_clear>
+ 300:	84 ec       	ldi	r24, 0xC4	; 196
+ 302:	0e 94 df 00 	call	0x1be	; 0x1be <lcd_wr_command>
+ 306:	89 e1       	ldi	r24, 0x19	; 25
+ 308:	92 e0       	ldi	r25, 0x02	; 2
+ 30a:	0e 94 41 01 	call	0x282	; 0x282 <lcd_string>
+ 30e:	0e 94 56 01 	call	0x2ac	; 0x2ac <pirReading>
+ 312:	88 23       	and	r24, r24
+ 314:	31 f0       	breq	.+12     	; 0x322 <main+0x58>
+ 316:	83 e8       	ldi	r24, 0x83	; 131
+ 318:	0e 94 df 00 	call	0x1be	; 0x1be <lcd_wr_command>
+ 31c:	83 e2       	ldi	r24, 0x23	; 35
+ 31e:	92 e0       	ldi	r25, 0x02	; 2
+ 320:	05 c0       	rjmp	.+10     	; 0x32c <main+0x62>
+ 322:	83 e8       	ldi	r24, 0x83	; 131
+ 324:	0e 94 df 00 	call	0x1be	; 0x1be <lcd_wr_command>
+ 328:	8d e2       	ldi	r24, 0x2D	; 45
+ 32a:	92 e0       	ldi	r25, 0x02	; 2
+ 32c:	0e 94 41 01 	call	0x282	; 0x282 <lcd_string>
+ 330:	2f ef       	ldi	r18, 0xFF	; 255
+ 332:	8f e7       	ldi	r24, 0x7F	; 127
+ 334:	94 e0       	ldi	r25, 0x04	; 4
+ 336:	21 50       	subi	r18, 0x01	; 1
+ 338:	80 40       	sbci	r24, 0x00	; 0
+ 33a:	90 40       	sbci	r25, 0x00	; 0
+ 33c:	e1 f7       	brne	.-8      	; 0x336 <main+0x6c>
+ 33e:	00 c0       	rjmp	.+0      	; 0x340 <main+0x76>
+ 340:	00 00       	nop
+ 342:	e5 cf       	rjmp	.-54     	; 0x30e <main+0x44>
 
-00000346 <_exit>:
- 346:	f8 94       	cli
+00000344 <_exit>:
+ 344:	f8 94       	cli
 
-00000348 <__stop_program>:
- 348:	ff cf       	rjmp	.-2      	; 0x348 <__stop_program>
+00000346 <__stop_program>:
+ 346:	ff cf       	rjmp	.-2      	; 0x346 <__stop_program>

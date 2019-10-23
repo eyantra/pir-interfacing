@@ -28,7 +28,7 @@ void port_init()
 }
 
 //Function to initialize all devices
-void init_devices (void)
+void init_devices(void)
 {
 	cli(); //Clears the global interrupts
 	port_init();
