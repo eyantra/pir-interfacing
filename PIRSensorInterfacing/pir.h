@@ -22,8 +22,8 @@ bool pirReading();
 //Function to config sensor port
 void pir_port_config(void)
 {
-	PIR_PD &= ~(1 << PIR_PIN); //set sensor port io direction to input
-	//PIR_PORT &= ~(1 << PIR_PIN); //clear data to port
+	PIR_PD &= ~(1 << PIR_PIN); //set sensor pin io direction to input
+	//PIR_PORT &= ~(1 << PIR_PIN); //write low to pin
 }
 
 //Function to initialize sensor
@@ -35,7 +35,7 @@ void pir_init()
 //Function to get sensor digital data
 bool pirReading()
 {
-	if((PIR_PDR & (1 << PIR_PIN)) >> PIR_PIN) return true; //check if port input level is high
+	if((PIR_PDR & (1 << PIR_PIN)) >> PIR_PIN) return true; //check if pin input level is high
 	return false;
 }
 
